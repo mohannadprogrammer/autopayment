@@ -7,11 +7,13 @@
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
                 <!-- Insert the fields after the existing payment reference -->
-                <xpath expr="//field[@name='payment_reference']" position="after">
-                    <group>
-                        <field name="payment_type"/>
-                        <field name="payment_method_id"/>
-                    </group>
+                <xpath expr="//div[@class='o_col']" position="after">
+                        
+                        <label for ="mo_payment_type" style="font-weight:bold;" string="payment Type"/>
+                        <field name="mo_payment_type" nolabel="1"/>
+
+                        <label for ="payment_method_id" style="font-weight:bold;" string="payment method"/>
+                        <field name="payment_method_id" nolabel="1"/>
                 </xpath>
             </field>
         </record>
