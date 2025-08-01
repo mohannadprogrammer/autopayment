@@ -3,7 +3,7 @@ from odoo import api, fields, models, _
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    payment_type = fields.Selection(
+    mo_payment_type = fields.Selection(
         selection=[
             ('ajil', 'أجل'),
             ('ghair_ajil', 'غير أجل'),
@@ -15,8 +15,7 @@ class AccountMove(models.Model):
         'account.payment.method',
         string='Payment Method'
     )
-    
-    # @api.model
+    @api.model
     def create(self, vals):
         move = super().create(vals)
         if vals.get('payment_type') == 'ghair_ajil' and move.move_type == 'out_invoice':
