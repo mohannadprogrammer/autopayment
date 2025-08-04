@@ -83,14 +83,21 @@ class AccountMove(models.Model):
     @api.model
     def create(self, vals):
         move = super().create(vals)
-       
         # for rec in vals:
-        if vals.get('mo_payment_type') == 'ghair_ajil' :
-            
-            move._create_instant_payment()
-        return move
+        # if vals.get('mo_payment_type') == 'ghair_ajil' :
 
+        #     move._create_instant_payment()
+        return move
+    
+    def action_post(self):
+        self._create_instant_payment()
+        print("actino post ###########################################################")
+        super().action_post()
+        
+        return False
+    
     def _create_instant_payment(self):
+        self.ensure_one()
         payment_vals = {
             'payment_type': 'inbound',
             'payment_method_id':self.payment_method_id.id,
@@ -98,13 +105,12 @@ class AccountMove(models.Model):
             'amount': self.amount_total,
             'date': Date.today(),
             'ref': self.name,
-            # 'payment_method_id': self.payment_method_id.id,
             'payment_method_line_id': self.payment_method_id.id,
             'journal_id': self.payment_journal_id.id,
             
-            
             'reconciled_invoice_ids': [(6, 0, [self.id])]
+            
         }
         print(payment_vals)
         payment = self.env['account.payment'].create(payment_vals)
-        payment.action_post()
+        # payment.action_post()
