@@ -1,5 +1,8 @@
 from odoo import api, fields, models, _
 from odoo.fields import Date
+import json
+
+from odoo.tools import date_utils
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
@@ -67,10 +70,9 @@ class AccountMove(models.Model):
             ('company_id', 'child_of', self.env.company.id),
             ('type', 'in', ('bank', 'cash')),
         ])
-        print("payment_journal_id")
+        
         for pay in self:
             # if pay.payment_type == 'inbound':
-            print("payment_journal_id")
             pay.available_payment_journal_ids = journals.filtered('inbound_payment_method_line_ids')
             # else:
                 # pay.available_journal_ids = journals.filtered('outbound_payment_method_line_ids')
@@ -80,24 +82,29 @@ class AccountMove(models.Model):
         self.ensure_one()
         return []
 
-    @api.model
-    def create(self, vals):
-        move = super().create(vals)
-        # for rec in vals:
-        # if vals.get('mo_payment_type') == 'ghair_ajil' :
-
-        #     move._create_instant_payment()
-        return move
+   
     
     def action_post(self):
-        self._create_instant_payment()
-        print("actino post ###########################################################")
+        
         super().action_post()
+        for rec in self:
+            if rec.mo_payment_type== 'ghair_ajil' :
+                payment_created =self.env['account.payment'].search([('ref', '=', rec.name)])
+                if not payment_created:
+                    payment = rec._create_instant_payment()
+                    print("payment created",payment.line_ids[1].id)
+                    print("payment created new line",payment.line_ids)
+                    # pass the credit line in the payment ti assign it ro the invoice
+                    rec.js_assign_outstanding_line(payment.line_ids[1].id)
+                else:
+                    rec.js_assign_outstanding_line(payment_created.line_ids[1].id)
+
         
         return False
     
     def _create_instant_payment(self):
         self.ensure_one()
+
         payment_vals = {
             'payment_type': 'inbound',
             'payment_method_id':self.payment_method_id.id,
@@ -113,4 +120,5 @@ class AccountMove(models.Model):
         }
         print(payment_vals)
         payment = self.env['account.payment'].create(payment_vals)
-        # payment.action_post()
+        payment.action_post()
+        return payment

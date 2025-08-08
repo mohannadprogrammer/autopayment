@@ -1,7 +1,7 @@
 {
     'name': 'Custom Invoice Extension',
     'version': '1.0',
-    'depends': ['base_accounting_kit'],
+    'depends': ['account'],
     'author': 'Mohannad Waheed',
     'sequence': '1',
     'category': 'Accounting',
