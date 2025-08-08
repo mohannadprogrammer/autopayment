@@ -11,12 +11,12 @@
                         <field name="available_payment_method_line_ids" invisible="1"/>
                         <field name="available_payment_journal_ids" invisible="1"/>
                         
-                        <label for ="mo_payment_type" style="font-weight:bold;" string="payment Type"/>
-                        <field name="mo_payment_type" nolabel="1"/>
+                        <label for ="mo_payment_type" style="font-weight:bold;" string="payment Type" invisible="state != 'draft' and not mo_payment_type"/>
+                        <field name="mo_payment_type" nolabel="1" invisible="state != 'draft' and not mo_payment_type"  />
 
                         <label for ="payment_journal_id" style="font-weight:bold;" string="payment Journal" invisible="mo_payment_type != 'ghair_ajil'"/>
                         <field name="payment_journal_id" domain="[('id', 'in', available_payment_journal_ids)]" nolabel="1" invisible="mo_payment_type != 'ghair_ajil'"/>
-                        
+
                         <label for ="payment_method_id" style="font-weight:bold;" string="payment method" invisible="mo_payment_type != 'ghair_ajil'"/>
                         <field name="payment_method_id" nolabel="1" invisible="mo_payment_type != 'ghair_ajil'"/>
 
