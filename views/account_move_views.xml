@@ -14,11 +14,12 @@
                         <label for ="mo_payment_type" style="font-weight:bold;" string="payment Type"/>
                         <field name="mo_payment_type" nolabel="1"/>
 
-                        <label for ="payment_method_id" style="font-weight:bold;" string="payment method"/>
-                        <field name="payment_method_id" nolabel="1"/>
+                        <label for ="payment_journal_id" style="font-weight:bold;" string="payment Journal" invisible="mo_payment_type != 'ghair_ajil'"/>
+                        <field name="payment_journal_id" domain="[('id', 'in', available_payment_journal_ids)]" nolabel="1" invisible="mo_payment_type != 'ghair_ajil'"/>
+                        
+                        <label for ="payment_method_id" style="font-weight:bold;" string="payment method" invisible="mo_payment_type != 'ghair_ajil'"/>
+                        <field name="payment_method_id" nolabel="1" invisible="mo_payment_type != 'ghair_ajil'"/>
 
-                        <label for ="payment_journal_id" style="font-weight:bold;" string="payment Journal"/>
-                        <field name="payment_journal_id" domain="[('id', 'in', available_payment_journal_ids)]" nolabel="1"/>
                 </xpath>
             </field>
         </record>

@@ -59,7 +59,7 @@ class AccountMove(models.Model):
             to_exclude = pay._get_payment_method_codes_to_exclude()
             if to_exclude:
                 pay.available_payment_method_line_ids = pay.available_payment_method_line_ids.filtered(lambda x: x.code not in to_exclude)
-    @api.depends('company_id')
+    @api.depends('mo_payment_type')
     def _compute_available_payment_journal_ids(self):
         """
         Get all journals having at least one payment method for inbound/outbound depending on the payment_type.
@@ -74,6 +74,9 @@ class AccountMove(models.Model):
         for pay in self:
             # if pay.payment_type == 'inbound':
             pay.available_payment_journal_ids = journals.filtered('inbound_payment_method_line_ids')
+            if (pay.mo_payment_type == 'ghair_ajil' ):
+                pay.payment_journal_id = journals.filtered('inbound_payment_method_line_ids')[0]
+
             # else:
                 # pay.available_journal_ids = journals.filtered('outbound_payment_method_line_ids')
 
