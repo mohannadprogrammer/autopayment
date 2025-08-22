@@ -2,7 +2,7 @@
 
 this module create payment autmaticcaly when confirm an invoice 
 
-.. image:: https://img.shields.io/badge/license-AGPL--3-blue.svg
+:image:: https://img.shields.io/badge/license-AGPL--3-blue.svg
     :target: https://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
@@ -19,5 +19,12 @@ https://www.gnu.org/licenses/agpl-3.0-standalone.html
 
 Configuration
 =============
-* Just Activate this module and Auto payment run 
+* Just Activate this module and Auto payment run
+
+* step 1:
+  <img src="static/description/Screenshot from 2025-08-22 21-13-46.png"/>
+* step 2:
+  <img src="static/description/Screenshot from 2025-08-22 21-14-04.png"/>
+  
+          
 
