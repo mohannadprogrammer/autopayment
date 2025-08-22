@@ -3,7 +3,6 @@
     'version': '1.0',
     'depends': ['account'],
     'author': 'Mohannad Waheed',
-    'icon': 'static/description/banner.png',
     'summary': 'Extends the invoice model to include payment type and method',
     'sequence': '1',
     'images': ['static/description/banner.png'   , 
