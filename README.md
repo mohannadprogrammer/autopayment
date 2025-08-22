@@ -19,5 +19,5 @@ https://www.gnu.org/licenses/agpl-3.0-standalone.html
 
 Configuration
 =============
-* Select QR code generation method from Configuration --> Settings --> QR Code
+* Just Activate this module and Auto payment run 
 
