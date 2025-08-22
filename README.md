@@ -3,7 +3,7 @@
 this module create payment autmaticcaly when confirm an invoice 
 
 
-Advanced VAT Invoice
+Autopayment
 ====================
 This module allow us to auto payment and workflow in create invoice and also this module 
 
